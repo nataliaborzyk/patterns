@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>natalia borzyk · surface patterns & illustrations</title>
+<meta name="description" content="Selection of surface patterns and illustrations designed by Natalia Borzyk — designer based in Milan.">
+<meta name="author" content="Natalia Borzyk">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Natalia Borzyk · Works">
+<meta property="og:description" content="Selection of surface patterns and illustrations designed by Natalia Borzyk.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://patterns.nataliaborzyk.com/">
+<meta property="og:image" content="https://nataliaborzyk.com/aboutme.png">
+
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/x-icon" href="https://nataliaborzyk.com/favicon.ico">
+<link rel="shortcut icon" href="https://nataliaborzyk.com/favicon.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --black: #0E0E0E;
+  --ink:   #1A1A1A;
+  --mid:   #6B6B6B;
+  --line:  #DCDCDC;
+  --soft:  #F4F2EF;
+  --white: #FFFFFF;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Cormorant Garamond', 'Times New Roman', serif;
+  font-weight:400;
+  color:var(--ink);
+  background:var(--white);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+img { display:block; max-width:100%; }
+a   { color:inherit; text-decoration:none; }
+button { font-family:inherit; }
+
+/* ── PAGE WRAPPER ── */
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ── HEADER ── */
+.site-head {
+  padding: 72px 80px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 28px;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards .15s;
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap: 40px;
+  width:100%;
+  justify-content:center;
+}
+.brand-line {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.brand a {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+.brand-name {
+  font-family:'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 60px);
+  letter-spacing: .005em;
+  font-style: italic;
+  color: var(--black);
+  white-space:nowrap;
+  font-weight: 400;
+  line-height: 1;
+}
+.brand-logo {
+  height: clamp(144px, 16vw, 224px);
+  width: auto;
+  display: block;
+}
+.brand-sub {
+  font-family:'Cormorant Garamond', serif;
+  font-size: clamp(13px, 1.05vw, 16px);
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 400;
+  text-align: center;
+  padding: 0 24px;
+}
+
+/* ── DIVIDER ── */
+.rule {
+  margin: 44px auto 56px;
+  width: calc(100% - 160px);
+  height: 1px;
+  background: var(--line);
+}
+
+/* ── GRID ── */
+.grid {
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 0 80px;
+}
+.tile {
+  position:relative;
+  aspect-ratio: 4 / 5;
+  overflow:hidden;
+  cursor:pointer;
+  background:var(--soft);
+  opacity:0;
+  transform: translateY(28px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  transition: opacity 1s ease, transform 1s ease, box-shadow .35s ease;
+}
+.tile.in {
+  opacity:1;
+  transform: translateY(0);
+}
+.tile img {
+  position: relative;
+  z-index: 2;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter: saturate(0.75);
+  transition: transform .9s cubic-bezier(.2,.7,.2,1), filter .4s ease;
+}
+.tile:hover img { transform: scale(1.04); }
+
+/* ── IMAGE PROTECTION ── */
+.tile img,
+#modalImg {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* ── MODAL ── */
+.modal {
+  position:fixed;
+  inset:0;
+  z-index:500;
+  background: rgba(255,255,255,0.4);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 5vh 5vw;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .4s ease;
+}
+.modal.open {
+  opacity:1;
+  pointer-events:auto;
+}
+.modal img {
+  max-height: 90vh;
+  max-width: 90vw;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.14);
+  transform: scale(.96);
+  transition: transform .5s cubic-bezier(.2,.7,.2,1);
+  cursor: default;
+}
+.modal.open img { transform: scale(1); }
+.modal-close {
+  position:fixed;
+  top: 32px;
+  right: 36px;
+  background:transparent;
+  border:none;
+  font-family:'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor:pointer;
+  padding: 8px 12px;
+  font-weight: 400;
+  transition: opacity .2s;
+}
+.modal-close:hover { opacity: .5; }
+
+.modal-credit {
+  position: fixed;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 400;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .5s ease .15s;
+}
+.modal.open .modal-credit { opacity: 1; }
+
+/* ── ABOUT ── */
+.about {
+  margin-top: 72px;
+  padding: 104px 80px 88px;
+  display:grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 88px;
+  align-items:center;
+}
+.about-photo {
+  aspect-ratio: 4 / 5;
+  background: var(--soft);
+  overflow:hidden;
+  position: relative;
+}
+.about-photo img {
+  position: relative;
+  z-index: 2;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.about-photo-ph {
+  position:absolute;
+  inset:0;
+  z-index: 1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 12px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+.about-content .label {
+  font-family:'Cormorant Garamond', serif;
+  font-size: 15px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 36px;
+  display:block;
+  font-weight: 400;
+}
+.about-content p {
+  font-family:'Cormorant Garamond', serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin-bottom: 16px;
+  max-width: 480px;
+  font-weight: 400;
+}
+.about-content p a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+  transition: text-decoration-color .25s ease;
+}
+.about-content p a:hover {
+  text-decoration-color: var(--ink);
+}
+
+.socials {
+  margin-top: 44px;
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.social {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 28px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  transition: all .25s ease;
+  font-family:'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--ink);
+}
+.social:hover {
+  background: var(--ink);
+  color: var(--white);
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 44px;
+  padding: 44px 80px 48px;
+  text-align: center;
+}
+footer p {
+  font-family:'Cormorant Garamond', serif;
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: .04em;
+  color: var(--mid);
+  max-width: 920px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+footer strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1200px) {
+  .site-head { padding: 64px 56px 0; }
+  .brand { gap: 28px; }
+  .grid { padding: 0 56px; }
+  .rule { width: calc(100% - 112px); }
+  .about { padding: 96px 56px 80px; gap: 64px; }
+  footer { padding: 40px 56px 44px; }
+}
+@media (max-width: 960px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  .about {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .about-photo { aspect-ratio: 3 / 4; max-width: 480px; margin: 0 auto; }
+}
+@media (max-width: 720px) {
+  .site-head { padding: 48px 24px 0; gap: 20px; }
+  .brand { gap: 16px; }
+  .brand-sub { letter-spacing: .24em; }
+  .rule { width: calc(100% - 48px); margin: 36px auto 40px; }
+  .grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px; gap: 8px; }
+  .about { padding: 72px 24px 64px; margin-top: 100px; }
+  footer { padding: 36px 24px 40px; }
+  .modal-close { top: 20px; right: 20px; font-size: 12px; }
+}
+</style>
+<noscript><style>.tile { opacity: 1 !important; transform: none !important; }</style></noscript>
+</head>
+<body>
+
+<div class="page">
+
+<header class="site-head">
+
+  <div class="brand">
+    <span class="brand-line"></span>
+    <a href="https://patterns.nataliaborzyk.com/" aria-label=" — works">
+      <img src="logo-works.svg" alt="" class="brand-logo" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span class=&quot;brand-name&quot;></span>')">
+    </a>
+    <span class="brand-line"></span>
+  </div>
+
+  <span class="brand-sub">Surface Patterns · Illustrations · Milano · Gliwice</span>
+
+</header>
+
+<div class="rule"></div>
+
+<main>
+
+<section class="grid" id="grid">
+
+
+      <!-- Row 1 -->
+  <div class="tile" data-img="28.jpg" data-alt="Work 28">
+    <img src="28.jpg" alt="Work 28" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="27.jpg" data-alt="Work 27">
+    <img src="27.jpg" alt="Work 27" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="26.jpg" data-alt="Work 26">
+    <img src="26.jpg" alt="Work 26" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="25.jpg" data-alt="Work 25">
+    <img src="25.jpg" alt="Work 25" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  
+    <!-- Row 2 -->
+  <div class="tile" data-img="24.jpg" data-alt="Work 24">
+    <img src="24.jpg" alt="Work 24" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="23.jpg" data-alt="Work 23">
+    <img src="23.jpg" alt="Work 23" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="22.jpg" data-alt="Work 22">
+    <img src="22.jpg" alt="Work 22" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="21.jpg" data-alt="Work 21">
+    <img src="21.jpg" alt="Work 21" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  
+  <!-- Row 3 -->
+  <div class="tile" data-img="20.jpg" data-alt="Work 20">
+    <img src="20.jpg" alt="Work 20" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="19.jpg" data-alt="Work 19">
+    <img src="19.jpg" alt="Work 19" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="18.jpg" data-alt="Work 18">
+    <img src="18.jpg" alt="Work 18" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="17.jpg" data-alt="Work 17">
+    <img src="17.jpg" alt="Work 17" loading="lazy" onerror="this.style.display='none'">
+  </div>
+
+  <!-- Row 4 -->
+  <div class="tile" data-img="16.jpg" data-alt="Work 16">
+    <img src="16.jpg" alt="Work 16" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="15.jpg" data-alt="Work 15">
+    <img src="15.jpg" alt="Work 15" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="14.jpg" data-alt="Work 14">
+    <img src="14.jpg" alt="Work 14" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="13.jpg" data-alt="Work 13">
+    <img src="13.jpg" alt="Work 13" loading="lazy" onerror="this.style.display='none'">
+  </div>
+
+  <!-- Row 5 -->
+  <div class="tile" data-img="12.jpg" data-alt="Work 12">
+    <img src="12.jpg" alt="Work 12" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="11.jpg" data-alt="Work 11">
+    <img src="11.jpg" alt="Work 11" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="10.jpg" data-alt="Work 10">
+    <img src="10.jpg" alt="Work 10" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="09.jpg" data-alt="Work 09">
+    <img src="09.jpg" alt="Work 09" loading="lazy" onerror="this.style.display='none'">
+  </div>
+
+  <!-- Row 6 -->
+  <div class="tile" data-img="08.jpg" data-alt="Work 08">
+    <img src="08.jpg" alt="Work 08" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="07.jpg" data-alt="Work 07">
+    <img src="07.jpg" alt="Work 07" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="06.jpg" data-alt="Work 06">
+    <img src="06.jpg" alt="Work 06" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="05.jpg" data-alt="Work 05">
+    <img src="05.jpg" alt="Work 05" loading="lazy" onerror="this.style.display='none'">
+  </div>
+
+  <!-- Row 7 -->
+  <div class="tile" data-img="04.jpg" data-alt="Work 04">
+    <img src="04.jpg" alt="Work 04" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="03.jpg" data-alt="Work 03">
+    <img src="03.jpg" alt="Work 03" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="02.jpg" data-alt="Work 02">
+    <img src="02.jpg" alt="Work 02" loading="lazy" onerror="this.style.display='none'">
+  </div>
+  <div class="tile" data-img="01.jpg" data-alt="Work 01">
+    <img src="01.jpg" alt="Work 01" loading="lazy" onerror="this.style.display='none'">
+  </div>
+
+</section>
+
+<div class="rule"></div>
+
+<section class="about">
+  <div class="about-photo">
+    <span class="about-photo-ph">Photo</span>
+    <img src="natalia.jpg" alt="" onerror="this.style.display='none'">
+  </div>
+  <div class="about-content">
+    <span class="label">About Natalia</span>
+    <p>Polish-born, Milan-based, and nine years deep into a career as a designer. Patterns and illustrations are what I do for work, but they're also what I'd do anyway. Drawing has been my thing since I was a little girl filling paper with horses, flowers, and every animal I could imagine. In the late 90s, when my grandpa brought home his first PC, I discovered Microsoft Paint and never really left the screen since (just changed the software).</p>
+    <p>Outside of work, my world is shaped by the things I love: my 10-year-old ginger rescue dog Dingo (the absolute light of my life), loud music and live gigs, fantasy novels and video games I happily get lost into, travel whenever I can, and an old-school love of exchanging letters with penpals around the world, which is something I've been doing for many, many years.</p>
+    <p>If you're interested in a collaboration, contact me at <a href="mailto:hello@nataliaborzyk.com">hello@nataliaborzyk.com</a>!</p>
+
+    <div class="socials">
+      <a href="https://www.instagram.com/bataljart/" target="_blank" rel="noopener" class="social">Instagram</a>
+      <a href="https://linktr.ee/batalja" target="_blank" rel="noopener" class="social">Linktree</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="rule"></div>
+
+<footer>
+  <p>
+    <strong>&copy; Natalia Borzyk 2026</strong> &nbsp;|&nbsp; All Rights Reserved.
+    No part of this website may be shared, forwarded, published or otherwise reproduced without express written consent by Natalia Borzyk.
+  </p>
+</footer>
+
+</div><!-- /.page -->
+
+<div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Image viewer">
+  <button class="modal-close" id="modalClose" aria-label="Close viewer">Close &times;</button>
+  <img src="" alt="" id="modalImg">
+  <div class="modal-credit">Pattern/Illustration &copy; Natalia Borzyk</div>
+</div>
+
+<script>
+(function() {
+  // ── Scroll reveal with column-staggered delay ──
+  const tiles = Array.from(document.querySelectorAll('.tile'));
+  const COLS_DESKTOP = 4;
+  const COLS_TABLET  = 3;
+  const COLS_MOBILE  = 2;
+
+  function currentCols() {
+    const w = window.innerWidth;
+    if (w <= 720) return COLS_MOBILE;
+    if (w <= 960) return COLS_TABLET;
+    return COLS_DESKTOP;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const idx = tiles.indexOf(entry.target);
+        const col = idx % currentCols();
+        entry.target.style.transitionDelay = (col * 90) + 'ms';
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  tiles.forEach((t) => io.observe(t));
+
+  // ── Modal ──
+  const modal      = document.getElementById('modal');
+  const modalImg   = document.getElementById('modalImg');
+  const modalClose = document.getElementById('modalClose');
+
+  function openModal(src, alt) {
+    if (!src) return;
+    modalImg.src = src;
+    modalImg.alt = alt || '';
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(() => { modalImg.src = ''; }, 400);
+  }
+
+  tiles.forEach((tile) => {
+    tile.addEventListener('click', () => {
+      openModal(tile.dataset.img, tile.dataset.alt);
+    });
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target !== modalImg) closeModal();
+  });
+  modalClose.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  // ── Image protection — disable right-click and drag on portfolio images ──
+  document.querySelectorAll('.tile img, #modalImg').forEach((img) => {
+    img.addEventListener('contextmenu', (e) => e.preventDefault());
+    img.addEventListener('dragstart',  (e) => e.preventDefault());
+  });
+})();
+</script>
+</body>
+</html>
