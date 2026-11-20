@@ -6,6 +6,7 @@
 <title>natalia borzyk · surface patterns & illustrations</title>
 <meta name="description" content="Selection of surface patterns and illustrations designed by Natalia Borzyk — designer based in Milan.">
 <meta name="author" content="Natalia Borzyk">
+<meta name="robots" content="noai, noimageai">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Natalia Borzyk · Works">
@@ -31,6 +32,8 @@
   --line:  #DCDCDC;
   --soft:  #F4F2EF;
   --white: #FFFFFF;
+  --lilac: #C9B3EE;
+  --violet: #A97BEB;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -74,7 +77,7 @@ button { font-family:inherit; }
 .brand-line {
   flex: 1;
   height: 1px;
-  background: var(--line);
+  background: var(--lilac);
 }
 .brand a {
   display: inline-flex;
@@ -112,7 +115,18 @@ button { font-family:inherit; }
   margin: 44px auto 56px;
   width: calc(100% - 160px);
   height: 1px;
-  background: var(--line);
+  background: var(--lilac);
+}
+
+/* ── SPARKLE SEPARATOR ── */
+.spark {
+  display: inline-block;
+  width: .62em;
+  height: .62em;
+  margin: 0 .55em 0 .25em;
+  vertical-align: .05em;
+  background: var(--violet);
+  clip-path: polygon(50% 0,60% 38%,100% 50%,60% 62%,50% 100%,40% 62%,0 50%,40% 38%);
 }
 
 /* ── GRID ── */
@@ -393,7 +407,7 @@ footer strong {
     <span class="brand-line"></span>
   </div>
 
-  <span class="brand-sub">Surface Patterns · Illustrations · Milano · Gliwice</span>
+  <span class="brand-sub">Surface Patterns <i class="spark" aria-hidden="true"></i> Illustrations <i class="spark" aria-hidden="true"></i> Milano <i class="spark" aria-hidden="true"></i> Gliwice</span>
 
 </header>
 
